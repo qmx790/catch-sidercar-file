@@ -1,0 +1,23 @@
+name: Fetch and Save File
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天凌晨执行一次
+  workflow_dispatch:
+
+jobs:
+  fetch_and_save_file:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Copy file from system to repository
+      run: |
+        cp /System/Library/PrivateFrameworks/SidecarCore.framework/Versions/A/SidecarCore .
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub Action"
+        git add SidecarCore
+        git commit -m "Add SidecarCore framework" || true
+        git push origin master
