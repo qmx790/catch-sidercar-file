@@ -9,7 +9,7 @@ on:
 
 jobs:
   fetch_and_save_file:
-    runs-on: macos-10.15
+    runs-on: macos-11
 
     steps:
     - name: Checkout code
@@ -18,7 +18,7 @@ jobs:
     - name: Copy file from system to repository
       run: |
         uname -a
-        ls -la /System/Library/PrivateFrameworks/SidecarCore.framework/Versions/A/SidecarCore
+        cp /System/Library/PrivateFrameworks/SidecarCore.framework/Versions/A/SidecarCore .
         git config --global user.email "action@github.com"
         git config --global user.name "GitHub Action"
         git add SidecarCore
